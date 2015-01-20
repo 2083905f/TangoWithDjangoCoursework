@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from django.http import HttpResponse
 
 
@@ -9,7 +8,5 @@ def index(request):
 
 
 def about(request):
-    return HttpResponse("Rango says here is the about page <br/> <a href='/rango/'>index</a>"
-                        "<br/> This has been put together by Kelvin Fowler, 2083905")
-
-
+	context_dict = {'boldmessage': "This has been put together by Kelvin Fowler, 2083905"}
+	return render(request, 'rango/about.html', context_dict)
