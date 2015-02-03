@@ -16,16 +16,29 @@ class PageForm(forms.ModelForm):
     url = forms.URLField(max_length=200, help_text="Please enter the URL of the page")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
 
+    
+    class Meta:
+        model = Page
+        exclude = ('category',)
+        
     def clean(self):
         cleaned_data = self.cleaned_data
         url = cleaned_data.get('url')
-
+        print 'started'
+        # If url is not empty and doesn't start with 'http://', prepend 'http://'.
         if url and not url.startswith('http://'):
             url = 'http://' + url
             cleaned_data['url'] = url
 
-        return cleaned_data
-            
-    class Meta:
-        model = Page
-        exclude = ('category',)
+        return self.cleaned_data
+##class UserForm(forms.ModelForm):
+##    password = forms.CharField(widget=forms.PasswordInput())
+##
+##    class Meta:
+##        model = User
+##        fields = ('username', 'email', 'password')
+##
+##class UserProfileForm(forms.ModelForm):
+##    class Meta:
+##        model = UserProfile
+##        fields = ('website', 'picture')
