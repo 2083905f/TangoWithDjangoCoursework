@@ -31,6 +31,7 @@ def category(request, category_name_slug):
 
     return render(request, 'rango/category.html', context_dict)
 
+@login_required
 def add_category(request):
 
     if request.method == 'POST': #if this is a http post
@@ -46,6 +47,7 @@ def add_category(request):
 
     return render(request, 'rango/add_category.html', {'form': form})
 
+@login_required
 def add_page(request, category_name_slug):
 
     try:
@@ -170,4 +172,17 @@ def user_login(request):
 @login_required
 def restricted(request):
     return HttpResponse("YOU CAN SEE THIS COS YOU LOGGED IN")
+
+from django.contrib.auth import logout
+
+#use the login_required() decorator to ensure only those who are logged in can access the view.
+
+@login_required
+def user_logout(request):
+    #since we know the user is logged in we can now log them out.
+    logout(request)
+
+    #Take user back to homepage
+    return HttpResponseRedirect('/rango/')
+
 
