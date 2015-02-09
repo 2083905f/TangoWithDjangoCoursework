@@ -4,6 +4,7 @@ from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -158,9 +159,16 @@ def user_login(request):
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your Rango account is disabled.")
         else:
+            if not User.objects.filter(username=username):
+                print "Invalid login details: {0}, {1}".format(username, password)
+                return HttpResponse("Useranme not found")
+            else:
+                print "Invalid login details: {0}, {1}".format(username, password)
+                return HttpResponse("Incorrect Password")
             # Bad login details were provided. So we can't log the user in.
-            print "Invalid login details: {0}, {1}".format(username, password)
-            return HttpResponse("Invalid login details supplied.")
+            #print "Invalid login details: {0}, {1}".format(username, password)
+            #return HttpResponse("Invalid login details supplied.")
+        
 
     # The request is not a HTTP POST, so display the login form.
     # This scenario would most likely be a HTTP GET.
