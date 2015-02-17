@@ -18,6 +18,7 @@
                 <li><a href="/rango/restricted/">Restricted Page</a></li>
                 <li><a href="{% url 'auth_logout' %}?next=/rango/">Logout</a></li>
                 <li><a href="/rango/add_category/">Add a New Category</a></li>
+				<!--<li><a href ="/password/change/">Change Password</a></li>-->
             {% else %}
                 <li><a href="{% url 'registration_register' %}">Register Here</a></li>
                 <li><a href="{% url 'auth_login' %}">Login</a></li>
