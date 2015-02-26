@@ -211,7 +211,7 @@ def add_page(request, category_name_slug):
 
 @login_required
 def restricted(request):
-    return HttpResponse("YOU CAN SEE THIS COS YOU LOGGED IN")
+    return render(request, 'rango/restricted.html')
 
 from django.contrib.auth import logout
 
