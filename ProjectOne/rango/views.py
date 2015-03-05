@@ -214,7 +214,21 @@ def restricted(request):
     return render(request, 'rango/restricted.html')
 
 from django.contrib.auth import logout
+from rango.bing_search import run_query
 
+def search(request):
+    result_list = []
+
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+
+        if query:
+            result_list = run_query(query)
+
+    return render(request, 'rango/search.html', {'result_list': result_list})
+
+
+        
 #use the login_required() decorator to ensure only those who are logged in can access the view.
 
 ##@login_required
