@@ -54,7 +54,7 @@ def category(request, category_name_slug):
     context_dict['result_list'] = None
     context_dict['query'] = None
     if request.method == 'POST':
-        query = request.POST['query'].strip()
+        query = request.POST.get('query', '').strip()
 
         if query:
             # Run our Bing function to get the results list!
@@ -175,8 +175,12 @@ def profile(request):
     user = User.objects.get(username=request.user.username)
     profile = UserProfile.objects.get(user_id=user.id)
     context_dict = { 'user' : user, 'userprofile': profile}
+        
 
     return render(request, 'rango/profile.html', context_dict)
+
+def bad_url(request):
+    return render(request, 'rango/nopage.html')
 
         
 #use the login_required() decorator to ensure only those who are logged in can access the view.

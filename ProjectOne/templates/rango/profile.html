@@ -9,6 +9,7 @@
 		<li>Username - {{user.username}}</li>
 		<li>email - {{user.email}}</li>
 		
+		
 			{% if userprofile.website %}
 				<li>Website - <a href = "{{userprofile.website}}">{{userprofile.website}}</a></li>
 				{% else %}
@@ -16,7 +17,7 @@
 			{% endif %}
 			
 			{% if userprofile.picture %}
-				<li>Picture - <img src="{{userprofile.picture.url}}" alt = "Your Picture" /></li>
+				<li>Picture - <img  width="90" height="100" src="{{userprofile.picture.url}}" alt = "Your Picture" /></li>
 			{% else %}
 				No Picture Given
 			{% endif %}

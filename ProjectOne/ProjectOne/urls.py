@@ -18,6 +18,9 @@ urlpatterns = patterns('',
                        (r'^accounts/', include('registration.backends.simple.urls')),
                        )
 
+handler404 = 'rango.views.bad_url'
+handler500 = 'rango.views.bad_url'
+
 if settings.DEBUG:
 	urlpatterns += patterns(
 		'django.views.static',
